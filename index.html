@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>css-variables</title>
+</head>
+<body>
+    
+    <h1>Welcome to Town of <span class ='rainbow'>Rainbows</span></h1>
+
+    <div class="controls">
+      <label for="base">Base Color</label>
+      <input type="color" name="base" value="#ffc600" />
+      <label for="spacing">Spacing:</label>
+      <input type="range" name="spacing" min="10px" max="200" value="10px" data-sizing='px' />
+      <label for="blur">Blur:</label>
+      <input type="range" name="blur" main ="0px" max= "25px" value="10px" data-sizing='px' />
+    </div>
+
+    <img src="https://images.unsplash.com/photo-1545235616-db3cd822ad8c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=700" alt="">
+
+    <style>
+    :root {
+      --base:#ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+    img{
+      padding: var(--spacing);
+      filter: blur(var(--blur));
+      background: var(--base);
+    }
+    .rainbow{
+      color: var(--base);
+    }
+    body {
+       text-align: center;
+    }
+    body {
+      background: #7072c0;
+      color: rgb(49, 18, 30);
+      font-weight: 100;
+      font-size: 30px;
+    }
+
+    .controls{
+      margin-bottom: 20px;
+    }
+    
+    </style>
+
+    <script>
+     const inputs =  document.querySelectorAll('.controls input');
+
+     function handleChange() {
+       const suffix = this.dataset.sizing || '';
+        document.documentElement.style.setProperty(`--${this.name}`, this.value+suffix)
+       
+     }
+
+     inputs.forEach(input => input.addEventListener('change',handleChange));
+     inputs.forEach(input => input.addEventListener('mousemove', handleChange))
+    </script>
+</body>
+</html>
